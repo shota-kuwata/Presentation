@@ -9,7 +9,7 @@ window.onload = function() {
     console.log(iframe1.contentWindow.document)
     if (iframe1.contentWindow.document.title === "スタート画面") {
         console.log("スタート画面")
-        btn1 = iframe1.contentWindow.document.getElementById("btn1");
+        btn1 = iframe1.contentWindow.document.querySelector("#btn1");
         btn1.onclick = btn1Click;
     }
 
