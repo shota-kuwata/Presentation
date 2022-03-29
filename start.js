@@ -3,7 +3,6 @@
 
 pageInit() {
   console.log("start.js");
-  console.log(contentDocument);
   console.log(document);
   let btn1 = document.getElementById("btn1");
   btn1.onclick = btn1Click;
