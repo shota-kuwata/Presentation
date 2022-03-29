@@ -3,7 +3,6 @@
 
 window.onload = function() {
     console.log("script.js");
-    let btn1;
     const iframe1 = document.getElementById("iframe1");
 
 
