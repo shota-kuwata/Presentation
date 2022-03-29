@@ -1,7 +1,7 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
-window.onload = function() {
+pageInit() {
   console.log("start.js");
   console.log(contentDocument);
   console.log(document);
