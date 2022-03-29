@@ -2,7 +2,7 @@
 // 1行目に記載している 'use strict' は削除しないでください
 
 window.onload = function() {
-    console.log("onload");
+    console.log("script.js");
     let btn1;
     const iframe1 = document.getElementById("iframe1");
 
@@ -10,11 +10,11 @@ window.onload = function() {
     
     function loadStartWindow() {
         iframe1.src = "./start.html";
-        console.log("click");
+        console.log("loadStartWindow");
     }
 
     function loadGameWindow() {
         iframe1.src = "./game.html";
-        console.log("click");
+        console.log("loadGameWindow");
     }
 };
