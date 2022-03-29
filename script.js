@@ -4,7 +4,7 @@
 window.onload = function() {
     console.log("script.js");
     const iframe1 = document.getElementById("iframe1");
-
+    iframe1.contentDocument.pageInit();
 
     
     function loadStartWindow() {
