@@ -4,7 +4,6 @@
 window.onload = function() {
   console.log("start.js");
   const btn1 = document.getElementById("btn1");
-  const iframe1 = document.parent.getElementById("iframe1");
   btn1.onclick = btn1Click;
   
   function btn1Click() {
