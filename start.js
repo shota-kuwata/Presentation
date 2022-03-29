@@ -3,7 +3,7 @@
 
 window.onload = function() {
   console.log("start.js");
-  const btn1 = document.getElementById("btn1");
+  let btn1 = document.getElementById("btn1");
   btn1.onclick = btn1Click;
   
   function btn1Click() {
