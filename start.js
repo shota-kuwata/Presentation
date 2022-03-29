@@ -8,7 +8,7 @@ window.onload = function() {
   btn1.onclick = btn1Click;
   
   function btn1Click() {
-        iframe1.src = "./game.html";
-        console.log("click");
+    console.log("click");
+    document.parent.loadGameWindow();
   }
 }
