@@ -2,12 +2,16 @@
     height: 700px;
 } */
 
+body {
+    background-color: #e0ebaf;
+}
+
 .title{
     height: 30px;
 }
 
 .base{
-    font-size: 300;
+    /* font-size: 300; */
     width: 100%;
     height: calc(100% - 35px);
     border: 1px solid gray;
