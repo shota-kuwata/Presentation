@@ -11,11 +11,11 @@ body {
 }
 
 .base{
-    /* font-size: 300; */
     width: 100%;
-    height: calc(100% - 35px);
+    height: calc(100% - 40px);
     border: 1px solid gray;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .flex{
@@ -29,6 +29,7 @@ body {
     position: relative;
     border: 1px solid gray;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .block{
@@ -37,6 +38,7 @@ body {
     position: relative;
     border: 1px solid gray;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .str{
@@ -45,5 +47,6 @@ body {
     position: absolute;
     top: 50%; /*親要素を起点に上から50%*/
     left: 50%;  /*親要素を起点に左から50%*/
-    transform: translateY(-100%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+    /*要素の大きさの半分ずつを戻す*/
+    transform: translateY(-100%) translateX(-50%);
 }
