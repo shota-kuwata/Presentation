@@ -2,12 +2,12 @@
 // 1行目に記載している 'use strict' は削除しないでください
 
 // 全てのdiv要素のx,yとcolorをリスト化
-function getDivInfo() {
+function getDivInfo(document) {
     const divAll = document.getElementsByTagName("div");
     const divInfoList = [];
     let rect = {};
     for (const element of divAll) {
-        if (element.children[0] && element.children[0].tagName === "P") {
+        if (element.innerText !== "") {
             rect = element.getBoundingClientRect();
             divInfoList.push({x1: rect.x, x2: rect.x + rect.width,
                         y1: rect.y, y2: rect.y + rect.height,
@@ -18,13 +18,14 @@ function getDivInfo() {
 }
 
 // 増えたパネルに使える色を探索する
-function getColorListArray(newDiv, divInfoList) {
-    let rectInfo = {};
-    let checkX, checkY;
+function getColorListArray(colors, newDiv, divInfoList) {
+    let rect, rectInfo, checkX, checkY;
     const colorListArray = [];
     for (const element of newDiv) {
         rect = element.getBoundingClientRect();
-        element.style.fontSize = Math.min(rect.width, rect.height) / 2;
+        element.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
+        element.style.lineHeight = `${rect.height}px`;
+        
         rectInfo = {x1: rect.x, x2: rect.x + rect.width,
                     y1: rect.y, y2: rect.y + rect.height,
                     colorList: colors.slice()}; // <- 使える色リスト
@@ -44,6 +45,7 @@ function getColorListArray(newDiv, divInfoList) {
             }
         }
         colorListArray.push(rectInfo.colorList.slice());  // 使える色リスト格納
+        console.log(rectInfo.colorList);
     }
     return colorListArray;
 }
@@ -52,9 +54,11 @@ window.onload = function() {
     console.log("onload");
     const blocks = document.getElementsByClassName("block");
     const base = document.getElementsByClassName("base")[0];
-    const colors = ["aqua", "springgreen", "salmon", "violet", "lemonchiffon", "white"];
+    const colors = ["aqua", "springgreen", "salmon", "violet", "lemonchiffon", "gold"];
     base.style.backgroundColor = colors[0];
-    base.style.fontSize = Math.min(base.width, base.height) / 2;
+    let rect = base.getBoundingClientRect();
+    base.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
+    base.style.lineHeight = `${rect.height}px`;
 
     // クリックイベントの登録
     base.onclick = clickInfo;
@@ -65,28 +69,34 @@ window.onload = function() {
     // divがクリックされた時のイベント
     function clickInfo(element) {
         const block = (element.srcElement.tagName === "P") ? element.srcElement.parentNode : element.srcElement;
-        const cnt = Number(block.children[0].innerText) + 1;
+        const cnt = Number(block.innerText) + 1;
 
-        if (block.children[0].tagName !== "P") {
+        if (block.children.length > 0) {
             return  // 複数選択されたときは何もせず抜ける
         }
 
         // 元のdiv要素の枠線を削除し、2つのdivを追加する
         block.style.border = "0px";
+        block.style.backgroundColor = "";
+        block.innerText = "";
         let newDiv = [];
         if ((block.clientHeight > block.clientWidth)) {
-            block.innerHTML = `<div class="on"><p class="str">${cnt}</p></div><div class="on"><p class="str">${cnt}</p></div>`;
+            // block.innerHTML = `<div class="on"><p class="str">${cnt}</p></div><div class="on"><p class="str">${cnt}</p></div>`;
+            block.innerHTML = `<div class="on">${cnt}</div><div class="on">${cnt}</div>`;
             newDiv = block.children;
         } else {
-            block.innerHTML = `<div class="flex"><div class="block"><p class="str">${cnt}</p></div><div class="block"><p class="str">${cnt}</p></div>`
+            // block.innerHTML = `<div class="flex"><div class="block"><p class="str">${cnt}</p></div><div class="block"><p class="str">${cnt}</p></div>`
+            block.innerHTML = `<div class="flex"><div class="block">${cnt}</div><div class="block">${cnt}</div>`
             newDiv = block.children[0].children;
         }
 
         // 全てのdiv要素のx,yとcolorをリスト化
-        const divInfoList = getDivInfo();
+        const divInfoList = getDivInfo(document);
+        // console.log(divInfoList);
 
         // 増えたパネルに使える色を探索する
-        const colorListArray = getColorListArray(newDiv, divInfoList);
+        const colorListArray = getColorListArray(colors, newDiv, divInfoList);
+        // console.log(colorListArray);
 
         // 増えたパネルの背景色の設定
         // const len1 = infoList[0].length;
