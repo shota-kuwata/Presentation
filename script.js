@@ -7,7 +7,7 @@ function getDivInfo(document) {
     const divInfoList = [];
     let rect = {};
     for (const element of divAll) {
-        if (element.innerText !== "") {
+        if (element.style.backgroundColor !== "") {
             rect = element.getBoundingClientRect();
             divInfoList.push({x1: rect.x, x2: rect.x + rect.width,
                         y1: rect.y, y2: rect.y + rect.height,
@@ -45,7 +45,6 @@ function getColorListArray(colors, newDiv, divInfoList) {
             }
         }
         colorListArray.push(rectInfo.colorList.slice());  // 使える色リスト格納
-        console.log(rectInfo.colorList);
     }
     return colorListArray;
 }
@@ -56,7 +55,7 @@ window.onload = function() {
     const base = document.getElementsByClassName("base")[0];
     const colors = ["aqua", "springgreen", "salmon", "violet", "lemonchiffon", "gold"];
     base.style.backgroundColor = colors[0];
-    let rect = base.getBoundingClientRect();
+    const rect = base.getBoundingClientRect();
     base.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
     base.style.lineHeight = `${rect.height}px`;
 
@@ -68,7 +67,8 @@ window.onload = function() {
 
     // divがクリックされた時のイベント
     function clickInfo(element) {
-        const block = (element.srcElement.tagName === "P") ? element.srcElement.parentNode : element.srcElement;
+        // const block = (element.srcElement.tagName === "P") ? element.srcElement.parentNode : element.srcElement;
+        const block = element.srcElement;
         const cnt = Number(block.innerText) + 1;
 
         if (block.children.length > 0) {
@@ -110,5 +110,7 @@ window.onload = function() {
             colorListArray[1].splice(colorListArray[1].indexOf(colorListArray[0][0]), 1);
             newDiv[1].style.backgroundColor = colorListArray[1][0];
         }
+        console.log(block.clientHeight, block.clientWidth, 
+            newDiv[0].style.backgroundColor, newDiv[1].style.backgroundColor);
     }
 };
