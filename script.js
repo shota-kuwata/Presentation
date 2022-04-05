@@ -102,11 +102,11 @@ window.onresize = function() {
     console.log("onResize");
 
     // 全div要素の文字サイズを修正する
-    Array.from(document.getElementsByTagName("div")).map((element) => {
-        if (element.innerText !== "") {
+    Array.from(document.getElementsByTagName("div"))
+        .filter((element) => element.innerText !== "")
+        .map((element) => {
             const rect = element.getBoundingClientRect();
             element.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
             element.style.lineHeight = `${rect.height}px`;
-        }
     });
 }
