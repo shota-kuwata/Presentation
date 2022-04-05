@@ -42,7 +42,7 @@ function getColorListArray(colors, newDiv, divInfoList) {
 }
 
 // 最初にページがロードされた
-window.onload = function() {
+window.onload = () => {
     console.log("onLoad");
     const colors = ["aqua", "springgreen", "salmon", "violet", "lemonchiffon", "gold"];
 
@@ -98,7 +98,7 @@ window.onload = function() {
 };
 
 // ウィンドウサイズが変更された
-window.onresize = function() {
+window.onresize = () => {
     console.log("onResize");
 
     // 全div要素の文字サイズを修正する
