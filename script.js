@@ -84,14 +84,11 @@ window.onload = () => {
         const colorListArray = getColorListArray(colors, newDiv, divInfoList);
 
         // 増えたパネルの背景色の設定
-        if (colorListArray[1].length <= 1) {
-            newDiv[1].style.backgroundColor = colorListArray[1][0];
-            newDiv[0].style.backgroundColor = colorListArray[0].filter((color) => color !== colorListArray[1][0])[0];
-        } else {
-            newDiv[0].style.backgroundColor = colorListArray[0][0];
-            newDiv[1].style.backgroundColor = colorListArray[1].filter((color) => color !== colorListArray[0][0])[0];
-        }
-            
+        const indexRev = colorListArray[1].length <= 1 ? 0 : 1;
+        newDiv[1 - indexRev].style.backgroundColor = colorListArray[1 - indexRev][0];
+        newDiv[indexRev].style.backgroundColor = 
+            colorListArray[indexRev].filter((color) => color !== colorListArray[1 - indexRev][0])[0];
+        
         console.log(block.clientHeight, block.clientWidth, 
             newDiv[0].style.backgroundColor, newDiv[1].style.backgroundColor);
     }
@@ -108,5 +105,5 @@ window.onresize = () => {
             const rect = element.getBoundingClientRect();
             element.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
             element.style.lineHeight = `${rect.height}px`;
-    });
+        });
 }
