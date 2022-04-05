@@ -45,15 +45,18 @@ function getColorListArray(colors, newDiv, divInfoList) {
 window.onload = () => {
     console.log("onLoad");
     const colors = ["aqua", "springgreen", "salmon", "violet", "lemonchiffon", "gold"];
+    baseDivSetting();
 
-    const base = document.getElementsByClassName("base")[0];
-    const rect = base.getBoundingClientRect();
-    base.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
-    base.style.lineHeight = `${rect.height}px`;
-    base.style.backgroundColor = colors[0];
-
-    // 最初の親要素にクリックイベントの登録
-    base.onclick = clickInfo;
+    function baseDivSetting() {
+        const base = document.getElementsByClassName("base")[0];
+        const rect = base.getBoundingClientRect();
+        base.style.fontSize = Math.floor(Math.min(rect.width, rect.height) / 2);
+        base.style.lineHeight = `${rect.height}px`;
+        base.style.backgroundColor = colors[0];
+    
+        // 最初の親要素にクリックイベントの登録
+        base.onclick = clickInfo;
+    }
 
     // divがクリックされた時のイベント
     function clickInfo(element) {
